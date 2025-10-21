@@ -14,7 +14,7 @@ const telemetryPath = "/car_data"
 // Wrong filter parameter won't result in error but in an empty slice.
 // Excessive data requests may result in an error.
 func (c *Client) Telemetry(filter types.CarDataFilter) ([]types.CarData, error) {
-	fullURL := createFullURL(filter, c)
+	fullURL := createFullURL(filter, c, telemetryPath)
 	req, err := http.NewRequest("GET", fullURL, nil)
 	if err != nil {
 		return nil, err

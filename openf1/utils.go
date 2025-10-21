@@ -17,11 +17,11 @@ func cleanQuery(query string) string {
 }
 
 // createFullURL generates a full request URL from the given filter struct.
-func createFullURL[T any](filter T, c *Client) string {
+func createFullURL[T any](filter T, c *Client, path string) string {
 	v, _ := query.Values(filter)
 	query := v.Encode()
 	query = cleanQuery(query)
-	c.SetPath(telemetryPath + "?" + query)
+	c.SetPath(path + "?" + query)
 	fullURL := c.apiURL + c.apiVersion + c.path
 	return fullURL
 }
