@@ -33,7 +33,7 @@ type Driver struct {
 type Interval struct {
 	Date         time.Time `json:"date"`
 	DriverNumber int       `json:"driver_number"`
-	GapToLeader  float64   `json:"gap_to_leader"`
+	GapToLeader  any       `json:"gap_to_leader"`
 	Interval     float64   `json:"interval"`
 	MeetingKey   int       `json:"meeting_key"`
 	SessionKey   int       `json:"session_key"`
