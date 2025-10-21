@@ -110,16 +110,16 @@ type Position struct {
 }
 
 type RaceControl struct {
-	Category     string      `json:"category"`
-	Date         time.Time   `json:"date"`
-	DriverNumber int         `json:"driver_number"`
-	Flag         string      `json:"flag"`
-	LapNumber    int         `json:"lap_number"`
-	MeetingKey   int         `json:"meeting_key"`
-	Message      string      `json:"message"`
-	Scope        string      `json:"scope"`
-	Sector       interface{} `json:"sector"`
-	SessionKey   int         `json:"session_key"`
+	Category     string    `json:"category"`
+	Date         time.Time `json:"date"`
+	DriverNumber int       `json:"driver_number"`
+	Flag         string    `json:"flag"`
+	LapNumber    int       `json:"lap_number"`
+	MeetingKey   int       `json:"meeting_key"`
+	Message      string    `json:"message"`
+	Scope        string    `json:"scope"`
+	Sector       *int      `json:"sector"`
+	SessionKey   int       `json:"session_key"`
 }
 
 type Session struct {
