@@ -16,9 +16,9 @@ func (c *Client) Driver(filter types.DriverFilter) ([]types.Driver, error) {
 
 // DriverNumbersBySession returns a slice of driver numbers who participated in the specified session.
 // Only the numeric driver identifiers are returned, not full driver details.
-func (c *Client) DriverNumbersBySession(session_key string) ([]int, error) {
+func (c *Client) DriverNumbersBySession(sessionKey string) ([]int, error) {
 	laps, err := c.Laps(types.LapFilter{
-		SessionKey: session_key,
+		SessionKey: sessionKey,
 		LapNumber:  "1",
 	})
 	if err != nil {

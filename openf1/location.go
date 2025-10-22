@@ -17,11 +17,11 @@ func (c *Client) Location(filter types.LocationFilter) ([]types.Location, error)
 	return doGet[types.Location](c.httpClient, fullURL)
 }
 
-func (c *Client) LocationByLap(session_key, lap string, driver_number int) ([]types.Location, error) {
+func (c *Client) LocationByLap(sessionKey, lap string, driverNumber int) ([]types.Location, error) {
 	lapData, err := c.Laps(types.LapFilter{
-		SessionKey:   session_key,
+		SessionKey:   sessionKey,
 		LapNumber:    lap,
-		DriverNumber: driver_number,
+		DriverNumber: driverNumber,
 	})
 	if err != nil {
 		return nil, err
@@ -30,8 +30,8 @@ func (c *Client) LocationByLap(session_key, lap string, driver_number int) ([]ty
 	lapStartTime := lapData[0].DateStart
 	lapEndTime := lapStartTime.Add(duration)
 	locations, err := c.Location(types.LocationFilter{
-		SessionKey:   session_key,
-		DriverNumber: driver_number,
+		SessionKey:   sessionKey,
+		DriverNumber: driverNumber,
 		Date:         fmt.Sprintf(">=%s&date<=%s", lapStartTime, lapEndTime),
 	})
 	if err != nil {

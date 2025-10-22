@@ -15,9 +15,9 @@ func (c *Client) Intervals(filter types.IntervalFilter) ([]types.Interval, error
 }
 
 // LappedDrivers returns information about lapped drivers for the given session key.
-func (c *Client) LappedDrivers(session_key string) ([]types.Driver, error) {
+func (c *Client) LappedDrivers(sessionKey string) ([]types.Driver, error) {
 	intervals, err := c.Intervals(types.IntervalFilter{
-		SessionKey:  session_key,
+		SessionKey:  sessionKey,
 		GapToLeader: "+1 LAP",
 	})
 	if err != nil {
@@ -26,7 +26,7 @@ func (c *Client) LappedDrivers(session_key string) ([]types.Driver, error) {
 	var drivers []types.Driver
 	for _, interval := range intervals {
 		driver, err := c.Driver(types.DriverFilter{
-			SessionKey:   session_key,
+			SessionKey:   sessionKey,
 			DriverNumber: interval.DriverNumber,
 		})
 		if err != nil {

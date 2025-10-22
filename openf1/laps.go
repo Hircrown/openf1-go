@@ -18,10 +18,10 @@ func (c *Client) Laps(filter types.LapFilter) ([]types.Lap, error) {
 }
 
 // DriverFastestLap retrieves the fastest lap of the given driver in the specified session.
-func (c *Client) DriverFastestLap(session_key string, driver_number int) (types.Lap, error) {
+func (c *Client) DriverFastestLap(sessionKey string, driverNumber int) (types.Lap, error) {
 	laps, err := c.Laps(types.LapFilter{
-		SessionKey:   session_key,
-		DriverNumber: driver_number,
+		SessionKey:   sessionKey,
+		DriverNumber: driverNumber,
 	})
 	if err != nil {
 		return types.Lap{}, err
@@ -31,14 +31,14 @@ func (c *Client) DriverFastestLap(session_key string, driver_number int) (types.
 }
 
 // SessionFastestLap retrieves the fastest lap in the specified session.
-func (c *Client) SessionFastestLap(session_key string) (types.Lap, error) {
-	driverNumbers, err := c.DriverNumbersBySession(session_key)
+func (c *Client) SessionFastestLap(sessionKey string) (types.Lap, error) {
+	driverNumbers, err := c.DriverNumbersBySession(sessionKey)
 	if err != nil {
 		return types.Lap{}, err
 	}
 	fastestLaps := make([]types.Lap, 0, 20)
 	for _, num := range driverNumbers {
-		lap, err := c.DriverFastestLap(session_key, num)
+		lap, err := c.DriverFastestLap(sessionKey, num)
 		if err != nil {
 			return types.Lap{}, err
 		}
