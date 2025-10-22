@@ -65,3 +65,17 @@ func (c *Client) SafetyCar(sessionKey string) ([]types.RaceControl, error) {
 	}
 	return safetyCar, nil
 }
+
+// FIACommunications retrieves all race control events related to FIA communications
+// for the specified session key, such as investigations, track conditions,
+// lap time deletions during qualifying, etc.
+func (c *Client) FiaComunications(sessionKey string) ([]types.RaceControl, error) {
+	fiaComunicaitons, err := c.RaceControl(types.RaceControlFilter{
+		SessionKey: sessionKey,
+		Category:   "Other",
+	})
+	if err != nil {
+		return nil, err
+	}
+	return fiaComunicaitons, nil
+}
