@@ -13,6 +13,7 @@ import (
 func cleanQuery(query string) string {
 	query = strings.ReplaceAll(query, "=%3C", "%3C")
 	query = strings.ReplaceAll(query, "=%3E", "%3E")
+	query = strings.ReplaceAll(query, "%26", "&")
 	return query
 }
 
