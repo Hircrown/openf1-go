@@ -9,8 +9,11 @@ import (
 
 const locationPath = "/location"
 
-// Location retrieves location data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// Location retrieves The approximate location of the cars on the circuit data based on the given user filter,
+// at a sample rate of about 3.7 Hz. Useful for gauging their progress along the track, but lacks details
+// about lateral placement — i.e. whether the car is on the left or right side of the track.
+// The origin point (0, 0, 0) appears to be arbitrary and not tied to any specific location on the track.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Location(filter types.LocationFilter) ([]types.Location, error) {
 	fullURL := createFullURL(filter, c, locationPath)

@@ -6,8 +6,8 @@ import (
 
 const pitPath = "/pit"
 
-// Meetings retrieves meetings data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// Pits retrieves pits data based on the given user filter.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Pit(filter types.PitFilter) ([]types.Pit, error) {
 	fullURL := createFullURL(filter, c, pitPath)

@@ -6,8 +6,8 @@ import (
 
 const intervalsPath = "/intervals"
 
-// Intervals retrieves intervals data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// Intervals retrieves the gap to leader and driver ahead data based on the given user filter.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Intervals(filter types.IntervalFilter) ([]types.Interval, error) {
 	fullURL := createFullURL(filter, c, intervalsPath)

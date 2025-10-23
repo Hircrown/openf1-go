@@ -6,9 +6,10 @@ import (
 
 const overtakesPath = "/overtakes"
 
-// As reported in the openf1 api, this is a BETA endpoint
+// As reported in the openf1 api, this is a BETA endpoint.
+// This data is only available during races and may be incomplete.
 // Overtakes retrieves overtakes data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Overtakes(filter types.OvertakeFilter) ([]types.Overtake, error) {
 	fullURL := createFullURL(filter, c, overtakesPath)

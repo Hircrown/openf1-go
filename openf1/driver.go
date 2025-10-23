@@ -6,8 +6,8 @@ import (
 
 const driverPath = "/drivers"
 
-// Driver retrieves driver data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// Driver retrieves driver informations based on the given user filter.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Driver(filter types.DriverFilter) ([]types.Driver, error) {
 	fullURL := createFullURL(filter, c, driverPath)

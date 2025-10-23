@@ -34,7 +34,7 @@ type Interval struct {
 	Date         time.Time `json:"date"`
 	DriverNumber int       `json:"driver_number"`
 	GapToLeader  any       `json:"gap_to_leader"`
-	Interval     float64   `json:"interval"`
+	Interval     any       `json:"interval"`
 	MeetingKey   int       `json:"meeting_key"`
 	SessionKey   int       `json:"session_key"`
 }
@@ -145,7 +145,7 @@ type SessionResult struct {
 	Dsq          bool    `json:"dsq"`
 	DriverNumber int     `json:"driver_number"`
 	Duration     float64 `json:"duration"`
-	GapToLeader  int     `json:"gap_to_leader"`
+	GapToLeader  any     `json:"gap_to_leader"`
 	NumberOfLaps int     `json:"number_of_laps"`
 	MeetingKey   int     `json:"meeting_key"`
 	Position     int     `json:"position"`

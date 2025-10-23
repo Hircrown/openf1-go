@@ -7,7 +7,7 @@ import (
 	"github.com/Hircrown/openf1-go/openf1/types"
 )
 
-const raceControlPath = "/position"
+const raceControlPath = "/race_control"
 
 var validFlags = map[string]struct{}{
 	"GREEN":           {},
@@ -30,7 +30,7 @@ func validateFlagColor(input string) (string, error) {
 }
 
 // RaceControl retrieves race control data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) RaceControl(filter types.RaceControlFilter) ([]types.RaceControl, error) {
 	fullURL := createFullURL(filter, c, raceControlPath)

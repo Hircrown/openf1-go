@@ -4,10 +4,11 @@ import (
 	"github.com/Hircrown/openf1-go/openf1/types"
 )
 
-const stintsPath = "/car_data"
+const stintsPath = "/stints"
 
 // Stints retrieves stints data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// A stint refers to a period of continuous driving by a driver during a session.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Stints(filter types.StintFilter) ([]types.Stint, error) {
 	fullURL := createFullURL(filter, c, stintsPath)

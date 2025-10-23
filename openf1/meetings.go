@@ -7,7 +7,9 @@ import (
 const meetingsPath = "/meetings"
 
 // Meetings retrieves meetings data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// A meeting refers to a Grand Prix or testing weekend and usually includes multiple
+// sessions (practice, qualifying, race, ...).
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Meetings(filter types.MeetingFilter) ([]types.Meeting, error) {
 	fullURL := createFullURL(filter, c, meetingsPath)

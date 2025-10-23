@@ -1,7 +1,6 @@
 package openf1
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/Hircrown/openf1-go/openf1/types"
@@ -10,7 +9,7 @@ import (
 const lapsPath = "/laps"
 
 // Laps retrieves laps data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Laps(filter types.LapFilter) ([]types.Lap, error) {
 	fullURL := createFullURL(filter, c, lapsPath)
@@ -26,9 +25,6 @@ func (c *Client) DriverFastestLap(sessionKey string, driverNumber int) (types.La
 	})
 	if err != nil {
 		return types.Lap{}, err
-	}
-	if len(laps) == 0 {
-		return types.Lap{}, fmt.Errorf("could not find the fastest lap for session: %s, driver number: %d", sessionKey, driverNumber)
 	}
 	fastestLap := findFastestLap(laps)
 	return fastestLap, nil
@@ -48,6 +44,7 @@ func (c *Client) SessionFastestLap(sessionKey string) (types.Lap, error) {
 		}
 		fastestLaps = append(fastestLaps, lap)
 	}
+
 	fastestSessionLap := findFastestLap(fastestLaps)
 	return fastestSessionLap, nil
 }

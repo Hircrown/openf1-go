@@ -6,8 +6,9 @@ import (
 
 const positionPath = "/position"
 
-// Position retrieves position data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// Position retrieves driver positions throughout a session, including initial
+// placement and subsequent changes based on the given user filter.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Position(filter types.PositionFilter) ([]types.Position, error) {
 	fullURL := createFullURL(filter, c, positionPath)

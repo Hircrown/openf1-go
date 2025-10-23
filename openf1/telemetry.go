@@ -10,7 +10,7 @@ import (
 const telemetryPath = "/car_data"
 
 // Telemetry retrieves telemetry data based on the given user filter.
-// Wrong filter parameter won't result in error but in an empty slice.
+// An incorrect filter parameters resulting in no results will raise an error.
 // Excessive data requests may result in an error.
 func (c *Client) Telemetry(filter types.CarDataFilter) ([]types.CarData, error) {
 	fullURL := createFullURL(filter, c, telemetryPath)
@@ -45,18 +45,7 @@ func (c *Client) TelemetryByLap(sessionKey, lap string, driverNumber int) ([]typ
 	if err != nil {
 		return nil, err
 	}
-	if len(lapData) == 0 {
-		err := fmt.Errorf(
-			"request successful but returned no data for the following query parameters:\n"+
-				"  session key: %s\n"+
-				"  driver number: %d\n"+
-				"  lap number: %s",
-			sessionKey,
-			driverNumber,
-			lap,
-		)
-		return nil, err
-	}
+
 	duration := time.Duration(lapData[0].LapDuration * float64(time.Second))
 	lapStartTime := lapData[0].DateStart
 	lapEndTime := lapStartTime.Add(duration)
