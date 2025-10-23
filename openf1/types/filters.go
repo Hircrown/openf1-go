@@ -189,7 +189,7 @@ type WeatherFilter struct {
 	Humidity         string `url:"humidity,omitempty"`
 	MeetingKey       string `url:"meeting_key,omitempty"`
 	Pressure         string `url:"pressure,omitempty"`
-	Rainfall         string `url:"rainfall,omitempty"`
+	Rainfall         int    `url:"rainfall,omitempty"`
 	SessionKey       string `url:"session_key,omitempty"`
 	TrackTemperature string `url:"track_temperature,omitempty"`
 	WindDirection    string `url:"wind_direction,omitempty"`

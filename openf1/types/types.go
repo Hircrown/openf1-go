@@ -182,7 +182,7 @@ type TeamRadio struct {
 type Weather struct {
 	AirTemperature   float64   `json:"air_temperature"`
 	Date             time.Time `json:"date"`
-	Humidity         int       `json:"humidity"`
+	Humidity         float64   `json:"humidity"`
 	MeetingKey       int       `json:"meeting_key"`
 	Pressure         float64   `json:"pressure"`
 	Rainfall         int       `json:"rainfall"`
