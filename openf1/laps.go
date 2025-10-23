@@ -1,6 +1,7 @@
 package openf1
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/Hircrown/openf1-go/openf1/types"
@@ -25,6 +26,9 @@ func (c *Client) DriverFastestLap(sessionKey string, driverNumber int) (types.La
 	})
 	if err != nil {
 		return types.Lap{}, err
+	}
+	if len(laps) == 0 {
+		return types.Lap{}, fmt.Errorf("could not find the fastest lap for session: %s, driver number: %d", sessionKey, driverNumber)
 	}
 	fastestLap := findFastestLap(laps)
 	return fastestLap, nil
