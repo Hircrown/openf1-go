@@ -19,12 +19,12 @@ func (c *Client) StartingGrid(filter types.StartingGridFilter) ([]types.Starting
 }
 
 // StartingGridGP returns the starting grid for a specific Grand Prix, including both sprint and classic races.
-func (c *Client) StartingGridGP(countryName, year string, isSprintRace bool) ([]types.StartingGrid, error) {
+func (c *Client) StartingGridGP(cityName, year string, isSprintRace bool) ([]types.StartingGrid, error) {
 	qualifyingType := "Qualifying"
 	if isSprintRace {
-		qualifyingType = "Sprint"
+		qualifyingType = "Sprint Qualifying"
 	}
-	sessionKey, err := c.GetSessionKey(countryName, "Qualifying", qualifyingType, year)
+	sessionKey, err := c.GetSessionKey(cityName, "Qualifying", qualifyingType, year)
 	if err != nil {
 		return nil, err
 	}

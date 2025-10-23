@@ -26,9 +26,9 @@ func (c *Client) Sessions(filter types.SessionFilter) ([]types.Session, error) {
 // Practice - Practice 3   | Race - Sprint
 // Qualifying - Qualifying | Qualifying - Qualifying
 // Race - Race             | Race - Race
-func (c *Client) GetSessionKey(countryName, sessionType, sessionName, year string) (int, error) {
+func (c *Client) GetSessionKey(cityName, sessionType, sessionName, year string) (int, error) {
 	sessions, err := c.Sessions(types.SessionFilter{
-		CountryName: countryName,
+		Location:    cityName,
 		SessionType: sessionType,
 		SessionName: sessionName,
 		Year:        year,

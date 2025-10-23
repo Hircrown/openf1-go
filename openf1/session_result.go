@@ -17,12 +17,12 @@ func (c *Client) SessionResult(filter types.SessionResultFilter) ([]types.Sessio
 	return doGet[types.SessionResult](c.httpClient, fullURL)
 }
 
-func (c *Client) QualifyingResult(countryName, year string, isSprintRace bool) ([]types.SessionResult, error) {
+func (c *Client) QualifyingResult(cityName, year string, isSprintRace bool) ([]types.SessionResult, error) {
 	qualifyingType := "Qualifying"
 	if isSprintRace {
-		qualifyingType = "Sprint"
+		qualifyingType = "Sprint Qualifying"
 	}
-	sessionKey, err := c.GetSessionKey(countryName, "Qualifying", qualifyingType, year)
+	sessionKey, err := c.GetSessionKey(cityName, "Qualifying", qualifyingType, year)
 	if err != nil {
 		return nil, err
 	}
@@ -35,12 +35,12 @@ func (c *Client) QualifyingResult(countryName, year string, isSprintRace bool) (
 	return result, nil
 }
 
-func (c *Client) RaceResult(countryName, year string, isSprintRace bool) ([]types.SessionResult, error) {
+func (c *Client) RaceResult(cityName, year string, isSprintRace bool) ([]types.SessionResult, error) {
 	raceType := "Race"
 	if isSprintRace {
 		raceType = "Sprint"
 	}
-	sessionKey, err := c.GetSessionKey(countryName, "Race", raceType, year)
+	sessionKey, err := c.GetSessionKey(cityName, "Race", raceType, year)
 	if err != nil {
 		return nil, err
 	}

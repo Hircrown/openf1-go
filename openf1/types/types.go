@@ -140,16 +140,16 @@ type Session struct {
 }
 
 type SessionResult struct {
-	Dnf          bool    `json:"dnf"`
-	DNS          bool    `json:"dns"`
-	Dsq          bool    `json:"dsq"`
-	DriverNumber int     `json:"driver_number"`
-	Duration     float64 `json:"duration"`
-	GapToLeader  any     `json:"gap_to_leader"`
-	NumberOfLaps int     `json:"number_of_laps"`
-	MeetingKey   int     `json:"meeting_key"`
-	Position     int     `json:"position"`
-	SessionKey   int     `json:"session_key"`
+	Dnf          bool `json:"dnf"`
+	DNS          bool `json:"dns"`
+	Dsq          bool `json:"dsq"`
+	DriverNumber int  `json:"driver_number"`
+	Duration     any  `json:"duration"`
+	GapToLeader  any  `json:"gap_to_leader"`
+	NumberOfLaps int  `json:"number_of_laps"`
+	MeetingKey   int  `json:"meeting_key"`
+	Position     int  `json:"position"`
+	SessionKey   int  `json:"session_key"`
 }
 
 type StartingGrid struct {
