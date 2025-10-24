@@ -1,5 +1,6 @@
 # openf1-go
 
+[![License 0BSD](https://img.shields.io/badge/License-0BSD-pink.svg)](https://opensource.org/licenses/0BSD)
 [![Go Mod](https://img.shields.io/github/go-mod/go-version/Hircrown/openf1-go)](go.mod)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Hircrown/openf1-go)](https://goreportcard.com/report/github.com/Hircrown/openf1-go)
 
