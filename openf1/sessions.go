@@ -28,9 +28,9 @@ func (c *Client) Sessions(filter types.SessionFilter) ([]types.Session, error) {
 // Race - Race             | Race - Race
 func (c *Client) GetSessionKey(cityName, sessionType, sessionName, year string) (int, error) {
 	sessions, err := c.Sessions(types.SessionFilter{
-		Location:    cityName,
-		SessionType: sessionType,
-		SessionName: sessionName,
+		Location:    capitalize(cityName),
+		SessionType: capitalize(sessionType),
+		SessionName: capitalize(sessionName),
 		Year:        year,
 	})
 	if err != nil {

@@ -67,3 +67,17 @@ func doGet[T any](hc *http.Client, fullURL string) ([]T, error) {
 		return nil, errors.New(errMsg.Detail)
 	}
 }
+
+// capitalize formats a string so that the first letter of each word
+// is uppercase and the rest are lowercase.
+func capitalize(input string) string {
+	if input == "" {
+		return input
+	}
+	input = strings.ToLower(strings.TrimSpace(input))
+	words := strings.Fields(input)
+	for i := 0; i < len(words); i++ {
+		words[i] = strings.ToUpper(words[i][:1]) + words[i][1:]
+	}
+	return strings.Join(words, " ")
+}
