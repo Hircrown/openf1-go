@@ -1,7 +1,6 @@
 package openf1
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/Hircrown/openf1-go/openf1/types"
@@ -25,10 +24,16 @@ func (c *Client) DriverFastestLapTelemetry(sessionKey string, driverNumber int) 
 	duration := time.Duration(fastestLap.LapDuration * float64(time.Second))
 	lapStartTime := fastestLap.DateStart
 	lapEndTime := lapStartTime.Add(duration)
+	dateQuery, err := valuesBetween(
+		types.LocationFilter{}, "Date", lapStartTime.String(), lapEndTime.String(), true,
+	)
+	if err != nil {
+		return nil, err
+	}
 	telemetry, err := c.Telemetry(types.CarDataFilter{
 		SessionKey:   sessionKey,
 		DriverNumber: driverNumber,
-		Date:         fmt.Sprintf(">=%s&date<=%s", lapStartTime, lapEndTime),
+		Date:         dateQuery,
 	})
 	if err != nil {
 		return nil, err
@@ -49,10 +54,16 @@ func (c *Client) TelemetryByLap(sessionKey, lap string, driverNumber int) ([]typ
 	duration := time.Duration(lapData[0].LapDuration * float64(time.Second))
 	lapStartTime := lapData[0].DateStart
 	lapEndTime := lapStartTime.Add(duration)
+	dateQuery, err := valuesBetween(
+		types.LocationFilter{}, "Date", lapStartTime.String(), lapEndTime.String(), true,
+	)
+	if err != nil {
+		return nil, err
+	}
 	telemetry, err := c.Telemetry(types.CarDataFilter{
 		SessionKey:   sessionKey,
 		DriverNumber: driverNumber,
-		Date:         fmt.Sprintf(">=%s&date<=%s", lapStartTime, lapEndTime),
+		Date:         dateQuery,
 	})
 	if err != nil {
 		return nil, err

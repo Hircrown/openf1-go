@@ -3,7 +3,9 @@ package openf1
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
+	"reflect"
 	"strings"
 
 	"github.com/Hircrown/openf1-go/openf1/types"
@@ -76,8 +78,38 @@ func capitalize(input string) string {
 	}
 	input = strings.ToLower(strings.TrimSpace(input))
 	words := strings.Fields(input)
-	for i := 0; i < len(words); i++ {
+	for i := range len(words) {
 		words[i] = strings.ToUpper(words[i][:1]) + words[i][1:]
 	}
 	return strings.Join(words, " ")
+}
+
+// valuesBetween takes a generic filter struct and returns a query string
+// representing a range condition for a specific field.
+//
+// Parameters:
+//   - filter: A struct of any type T representing the filter (e.g., CarDataFilter{}, DriverFilter{}).
+//   - fieldName: The name (case sensitive) of the struct field to filter on (e.g., "DriverNumber").
+//   - min: The lower bound of the range.
+//   - max: The upper bound of the range.
+//   - extrmeIncluded: A boolean indicating whether the range endpoints are inclusive.
+//
+// Returns:
+//   - A string representing the range condition (e.g., "DriverNumber>=1&DriverNumber<=3").
+//   - An error if the field does not exist or cannot be accessed.
+func valuesBetween[T any](filter T, fieldName, min, max string, extrmeIncluded bool) (string, error) {
+	t := reflect.TypeOf(filter)
+	field, ok := t.FieldByName(fieldName)
+	if !ok {
+		return "", fmt.Errorf("could not find field %s for filter %T", fieldName, filter)
+	}
+	tag := field.Tag.Get("url")
+	if tag == "" {
+		return "", fmt.Errorf("passed a no filter type: %T", filter)
+	}
+	tagParts := strings.Split(tag, ",")
+	if extrmeIncluded {
+		return fmt.Sprintf(">=%s&%s<=%s", min, tagParts[0], max), nil
+	}
+	return fmt.Sprintf(">%s&%s<%s", min, tagParts[0], max), nil
 }
