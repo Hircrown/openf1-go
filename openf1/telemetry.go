@@ -24,7 +24,7 @@ func (c *Client) DriverFastestLapTelemetry(sessionKey string, driverNumber int) 
 	duration := time.Duration(fastestLap.LapDuration * float64(time.Second))
 	lapStartTime := fastestLap.DateStart
 	lapEndTime := lapStartTime.Add(duration)
-	dateQuery, err := valuesBetween(
+	dateQuery, err := ValuesBetween(
 		types.LocationFilter{}, "Date", lapStartTime.String(), lapEndTime.String(), true,
 	)
 	if err != nil {
@@ -54,7 +54,7 @@ func (c *Client) TelemetryByLap(sessionKey, lap string, driverNumber int) ([]typ
 	duration := time.Duration(lapData[0].LapDuration * float64(time.Second))
 	lapStartTime := lapData[0].DateStart
 	lapEndTime := lapStartTime.Add(duration)
-	dateQuery, err := valuesBetween(
+	dateQuery, err := ValuesBetween(
 		types.LocationFilter{}, "Date", lapStartTime.String(), lapEndTime.String(), true,
 	)
 	if err != nil {

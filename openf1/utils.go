@@ -97,7 +97,7 @@ func capitalize(input string) string {
 // Returns:
 //   - A string representing the range condition (e.g., "DriverNumber>=1&DriverNumber<=3").
 //   - An error if the field does not exist or cannot be accessed.
-func valuesBetween[T any](filter T, fieldName, min, max string, extrmeIncluded bool) (string, error) {
+func ValuesBetween[T any](filter T, fieldName, min, max string, extrmeIncluded bool) (string, error) {
 	t := reflect.TypeOf(filter)
 	field, ok := t.FieldByName(fieldName)
 	if !ok {
