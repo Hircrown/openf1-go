@@ -16,20 +16,19 @@ func (c *Client) Sessions(filter types.SessionFilter) ([]types.Session, error) {
 	return doGet[types.Session](c.httpClient, fullURL)
 }
 
-// The sessionType-sessionName combinations vary depending on the Grand Prix format.
+// The sessionName combinations vary depending on the Grand Prix format.
 // Note: The query is case-sensitive.
 //
-// Classic GP Format       | Sprint GP Format
-// ------------------------|--------------------------
-// Practice - Practice 1   | Practice - Practice 1
-// Practice - Practice 2   | Qualifying - Sprint Qualifying
-// Practice - Practice 3   | Race - Sprint
-// Qualifying - Qualifying | Qualifying - Qualifying
-// Race - Race             | Race - Race
-func (c *Client) GetSessionKey(cityName, sessionType, sessionName, year string) (int, error) {
+// Classic GP | Sprint GP
+// -----------|-------------------
+// Practice 1 | Practice 1
+// Practice 2 | Sprint Qualifying
+// Practice 3 | Sprint
+// Qualifying | Qualifying
+// Race       | Race
+func (c *Client) GetSessionKey(cityName, sessionName, year string) (int, error) {
 	sessions, err := c.Sessions(types.SessionFilter{
 		Location:    title(cityName),
-		SessionType: title(sessionType),
 		SessionName: title(sessionName),
 		Year:        year,
 	})

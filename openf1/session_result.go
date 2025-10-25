@@ -22,7 +22,7 @@ func (c *Client) QualifyingResult(cityName, year string, isSprintRace bool) ([]t
 	if isSprintRace {
 		qualifyingType = "Sprint Qualifying"
 	}
-	sessionKey, err := c.GetSessionKey(cityName, "Qualifying", qualifyingType, year)
+	sessionKey, err := c.GetSessionKey(cityName, qualifyingType, year)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (c *Client) RaceResult(cityName, year string, isSprintRace bool) ([]types.S
 	if isSprintRace {
 		raceType = "Sprint"
 	}
-	sessionKey, err := c.GetSessionKey(cityName, "Race", raceType, year)
+	sessionKey, err := c.GetSessionKey(cityName, raceType, year)
 	if err != nil {
 		return nil, err
 	}

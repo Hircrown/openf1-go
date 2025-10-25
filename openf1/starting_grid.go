@@ -24,7 +24,7 @@ func (c *Client) StartingGridGP(cityName, year string, isSprintRace bool) ([]typ
 	if isSprintRace {
 		qualifyingType = "Sprint Qualifying"
 	}
-	sessionKey, err := c.GetSessionKey(cityName, "Qualifying", qualifyingType, year)
+	sessionKey, err := c.GetSessionKey(cityName, qualifyingType, year)
 	if err != nil {
 		return nil, err
 	}
