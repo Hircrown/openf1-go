@@ -22,15 +22,15 @@ func (c *Client) Sessions(filter types.SessionFilter) ([]types.Session, error) {
 // Classic GP Format       | Sprint GP Format
 // ------------------------|--------------------------
 // Practice - Practice 1   | Practice - Practice 1
-// Practice - Practice 2   | Qualifying - Sprint
+// Practice - Practice 2   | Qualifying - Sprint Qualifying
 // Practice - Practice 3   | Race - Sprint
 // Qualifying - Qualifying | Qualifying - Qualifying
 // Race - Race             | Race - Race
 func (c *Client) GetSessionKey(cityName, sessionType, sessionName, year string) (int, error) {
 	sessions, err := c.Sessions(types.SessionFilter{
-		Location:    capitalize(cityName),
-		SessionType: capitalize(sessionType),
-		SessionName: capitalize(sessionName),
+		Location:    title(cityName),
+		SessionType: title(sessionType),
+		SessionName: title(sessionName),
 		Year:        year,
 	})
 	if err != nil {

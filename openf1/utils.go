@@ -10,6 +10,8 @@ import (
 
 	"github.com/Hircrown/openf1-go/openf1/types"
 	"github.com/google/go-querystring/query"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // cleanQuery fixes encoded query parameters where comparison operators like >= or <=
@@ -72,16 +74,10 @@ func doGet[T any](hc *http.Client, fullURL string) ([]T, error) {
 
 // capitalize formats a string so that the first letter of each word
 // is uppercase and the rest are lowercase.
-func capitalize(input string) string {
-	if input == "" {
-		return input
-	}
+func title(input string) string {
 	input = strings.ToLower(strings.TrimSpace(input))
-	words := strings.Fields(input)
-	for i := range len(words) {
-		words[i] = strings.ToUpper(words[i][:1]) + words[i][1:]
-	}
-	return strings.Join(words, " ")
+	caser := cases.Title(language.AmericanEnglish, cases.NoLower)
+	return caser.String(input)
 }
 
 // valuesBetween takes a generic filter struct and returns a query string
